@@ -1,21 +1,17 @@
-const allQuestion = document.querySelectorAll(".faqQuestion");
+const express = require("express");
+const path = require("path");
+const app = express();
+const port = 3000;
 
-allQuestion.forEach((question, i) =>
-  question.addEventListener("click", function () {
-    question.nextElementSibling.classList.toggle("h-[auto]");
-    question.nextElementSibling.classList.toggle("scale-y-100");
-    question.nextElementSibling.classList.toggle("p-[20px]");
-    question.children[1].classList.toggle("rotate-45");
+app.set("view engine", "ejs");
+app.set("views", "views");
 
-    allQuestion.forEach((el, index) => {
-      if (index !== i) {
-        el.nextElementSibling.classList.remove(
-          "h-[auto]",
-          "scale-y-100",
-          "p-[20px]"
-        );
-        el.children[1].classList.remove("rotate-45");
-      }
-    });
-  })
-);
+app.use(express.static(path.join(__dirname, "public")));
+
+app.get("/", (req, res) => {
+  res.render("index.ejs");
+});
+
+app.listen(port, () => {
+  console.log(`http://localhost:${port}/`);
+});
