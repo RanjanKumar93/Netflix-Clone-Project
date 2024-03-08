@@ -4,7 +4,7 @@ const app = express();
 const port = 9000;
 
 app.set("view engine", "ejs");
-app.set("views", "views");
+app.set("views", path.resolve("./views"));
 
 app.use(express.static(path.join(__dirname, "public")));
 
